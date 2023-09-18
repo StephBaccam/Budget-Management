@@ -1,14 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Depense, depenses } from '../depense';
+import { GestionDepenseService } from '../gestion-depense.service';
 
 @Component({
   selector: 'app-ajout-depense',
   templateUrl: './ajout-depense.component.html',
   styleUrls: ['./ajout-depense.component.css']
 })
-export class AjoutDepenseComponent {
+export class AjoutDepenseComponent implements OnInit {
+  constructor(private depenseService: GestionDepenseService) { }
 
-  items = [...depenses]
+  ngOnInit(): void {
+    console.log("Initialisation de AjoutDepenseComponent");
+  }
   
   nouvelleDepense: Depense = {
     id: 0,
@@ -19,6 +23,6 @@ export class AjoutDepenseComponent {
   };
 
   envoyerDepense() {
-    this.items.push(this.nouvelleDepense);
+    this.depenseService.ajoutDepense(this.nouvelleDepense);
   }
 }
