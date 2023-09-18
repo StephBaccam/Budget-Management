@@ -1,0 +1,7 @@
+<h2>Mes dépenses</h2>
+
+
+<li *ngFor="let depense of depenses">
+    <b>{{depense.date | date:'dd/MM/yyyy'}}</b> : {{depense.nom}} - {{depense.prix | currency}}
+    <em *ngIf="depense.description"> : {{depense.description}}</em>
+</li>

@@ -1,0 +1,11 @@
+<h2>Ajouter une dépense</h2>
+
+<div class="formulaire">
+    <form (ngSubmit)="envoyerDepense()">
+        <input type="text" [(ngModel)]="nouvelleDepense.nom" placeholder="Nom">
+        <input type="number" [(ngModel)]="nouvelleDepense.prix" placeholder="Prix">
+        <input type="text" [(ngModel)]="nouvelleDepense.description" placeholder="Description">
+        <input type="date" [(ngModel)]="nouvelleDepense.date">
+        <button type="submit">Ajouter Depense</button>
+    </form>
+</div>
