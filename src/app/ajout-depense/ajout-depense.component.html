@@ -2,12 +2,12 @@
 
 <div class="formulaire">
     <form [formGroup]="formulaire" (ngSubmit)="envoyerDepense()">
-        <input type="text" formControlName="nom" placeholder="Nom">
+        <input type="text" formControlName="nom" [(ngModel)]="nouvelleDepense.nom" placeholder="Nom">
         <div *ngIf="formulaire.get('nom')?.hasError('required') && formulaire.get('nom')?.touched">
           Le nom est requis.
         </div>
         
-        <input type="number" formControlName="prix" placeholder="Prix">
+        <input type="number" formControlName="prix" [(ngModel)]="nouvelleDepense.prix" placeholder="Prix">
         <div *ngIf="formulaire.get('prix')?.hasError('required') && formulaire.get('prix')?.touched">
           Le prix est requis.
         </div>
@@ -15,9 +15,9 @@
           Le prix doit être supérieur ou égal à 0.
         </div>
         
-        <input type="text" formControlName="description" placeholder="Description">
+        <input type="text" formControlName="description" [(ngModel)]="nouvelleDepense.description" placeholder="Description">
         
-        <input type="date" formControlName="date">
+        <input type="date" formControlName="date" [(ngModel)]="nouvelleDepense.date">
         <div *ngIf="formulaire.get('date')?.hasError('required') && formulaire.get('date')?.touched">
             La date est obligatoire
         </div>
