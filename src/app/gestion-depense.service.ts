@@ -16,4 +16,16 @@ export class GestionDepenseService {
   getDepenses() {
     return this.items;
   }
+
+  deleteDepense(idDepense: number) {
+    const index = this.items.findIndex(x => x.id === idDepense);
+    if(index !== -1) {
+      this.items.splice(index, 1);
+    }
+    else {
+      console.log("Erreur dans la suppression de la dépense");
+    }
+
+    return this.items;
+  }
 }

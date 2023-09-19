@@ -4,4 +4,5 @@
 <li *ngFor="let depense of depenses">
     <b>{{depense.date | date:'dd/MM/yyyy'}}</b> : {{depense.nom}} - {{depense.prix | currency}}
     <em *ngIf="depense.description"> : {{depense.description}}</em>
+    <button (click)="deleteDepense(depense)">Retirer la dépense</button>
 </li>

@@ -1,7 +1,8 @@
 //Pas besoin du service pour l'instant
 
 import { Injectable } from '@angular/core';
-import { solde } from './solde';
+import { BehaviorSubject } from 'rxjs';
+import { Solde } from './solde';
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +10,28 @@ import { solde } from './solde';
 export class GestionSoldeService {
 
   constructor() { }
-  solde = solde.solde;
+  private soldeSubject = new BehaviorSubject<Solde>({ solde: 0 });
 
   soldeApresDepense(depensePrix: number) {
-    this.solde = this.solde - depensePrix;
-    return this.solde;
+    const currentSolde = this.soldeSubject.value;
+    const newSolde = { solde: currentSolde.solde - depensePrix };
+    this.soldeSubject.next(newSolde);
   }
 
   getSolde() {
-    return this.solde
+    return this.soldeSubject.asObservable();
+  }
+
+  soldeApresSupprDepense(depensePrix: number) {
+    const currentSolde = this.soldeSubject.value;
+    const newSolde = { solde: currentSolde.solde + depensePrix };
+    this.soldeSubject.next(newSolde);
+  }
+
+  // Ajoutez une méthode d'initialisation
+  initSolde(initialSolde: number) {
+    const initialSoldeValue = { solde: initialSolde };
+    this.soldeSubject.next(initialSoldeValue);
   }
 
 }

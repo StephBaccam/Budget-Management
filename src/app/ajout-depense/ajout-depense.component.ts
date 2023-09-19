@@ -40,6 +40,7 @@ export class AjoutDepenseComponent implements OnInit {
 
   envoyerDepense() {
     this.depenseService.ajoutDepense(this.nouvelleDepense);
-    this.monSolde.solde = this.monSolde.solde - this.nouvelleDepense.prix;
+    // this.monSolde.solde = this.monSolde.solde - this.nouvelleDepense.prix;
+    this.soldeService.soldeApresDepense(this.nouvelleDepense.prix);
   }
 }
