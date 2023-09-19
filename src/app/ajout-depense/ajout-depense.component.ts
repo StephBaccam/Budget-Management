@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 import { Depense, depenses } from '../depense';
 import { GestionDepenseService } from '../gestion-depense.service';
+import { GestionSoldeService } from '../gestion-solde.service';
+import { Solde, solde } from '../solde';
 
 @Component({
   selector: 'app-ajout-depense',
@@ -8,11 +12,23 @@ import { GestionDepenseService } from '../gestion-depense.service';
   styleUrls: ['./ajout-depense.component.css']
 })
 export class AjoutDepenseComponent implements OnInit {
-  constructor(private depenseService: GestionDepenseService) { }
+  formulaire: FormGroup;
+  constructor(private depenseService: GestionDepenseService, private soldeService: GestionSoldeService, private formBuilder: FormBuilder) {
+    this.formulaire = this.formBuilder.group({
+      nom: ['', Validators.required],
+      prix: [0, [Validators.required, Validators.min(0)]],
+      description: [''],
+      date: ['', Validators.required]  
+    })
+   }
 
   ngOnInit(): void {
     console.log("Initialisation de AjoutDepenseComponent");
   }
+
+  monSolde: Solde = { 
+    solde: solde.solde
+  };
   
   nouvelleDepense: Depense = {
     id: 0,
@@ -24,5 +40,6 @@ export class AjoutDepenseComponent implements OnInit {
 
   envoyerDepense() {
     this.depenseService.ajoutDepense(this.nouvelleDepense);
+    this.monSolde.solde = this.monSolde.solde - this.nouvelleDepense.prix;
   }
 }

@@ -1,11 +1,29 @@
 <h2>Ajouter une dépense</h2>
 
 <div class="formulaire">
-    <form (submit)="envoyerDepense()">
-        <input type="text" [(ngModel)]="nouvelleDepense.nom" [ngModelOptions]="{standalone: true}" placeholder="Nom">
-        <input type="number" [(ngModel)]="nouvelleDepense.prix" [ngModelOptions]="{standalone: true}" placeholder="Prix">
-        <input type="text" [(ngModel)]="nouvelleDepense.description"  [ngModelOptions]="{standalone: true}" placeholder="Description">
-        <input type="date" [(ngModel)]="nouvelleDepense.date" [ngModelOptions]="{standalone: true}">
-        <button type="submit">Ajouter Depense</button>
-    </form>
+    <form [formGroup]="formulaire" (ngSubmit)="envoyerDepense()">
+        <input type="text" formControlName="nom" placeholder="Nom">
+        <div *ngIf="formulaire.get('nom')?.hasError('required') && formulaire.get('nom')?.touched">
+          Le nom est requis.
+        </div>
+        
+        <input type="number" formControlName="prix" placeholder="Prix">
+        <div *ngIf="formulaire.get('prix')?.hasError('required') && formulaire.get('prix')?.touched">
+          Le prix est requis.
+        </div>
+        <div *ngIf="formulaire.get('prix')?.hasError('min') && formulaire.get('prix')?.touched">
+          Le prix doit être supérieur ou égal à 0.
+        </div>
+        
+        <input type="text" formControlName="description" placeholder="Description">
+        
+        <input type="date" formControlName="date">
+        <div *ngIf="formulaire.get('date')?.hasError('required') && formulaire.get('date')?.touched">
+            La date est obligatoire
+        </div>
+        
+        <button type="submit" [disabled]="formulaire.invalid">Ajouter Depense</button>
+      </form>
 </div>
+
+<app-mon-solde [solde]="monSolde"></app-mon-solde>

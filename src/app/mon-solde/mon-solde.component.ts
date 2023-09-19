@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { solde } from '../solde';
+import { Component, Input } from '@angular/core';
+import { Solde } from '../solde';
 
 @Component({
   selector: 'app-mon-solde',
@@ -7,5 +7,6 @@ import { solde } from '../solde';
   styleUrls: ['./mon-solde.component.css']
 })
 export class MonSoldeComponent {
-  monSolde = solde.solde;
+  @Input() solde: Solde | undefined;
+  
 }
