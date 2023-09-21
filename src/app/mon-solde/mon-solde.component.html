@@ -1,3 +1,5 @@
 <h2>Mon Solde</h2>
 
-<div class="mon-solde">Solde : {{ solde?.solde | currency }}</div>
+<div class="mon-solde">
+    <span>Solde : {{ solde?.solde | currency }} <a [title]="'Modifier le solde'" [routerLink]="['/solde']"></a></span>
+</div>
