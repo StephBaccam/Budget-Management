@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Depense, depenses } from '../depense';
-import { GestionDepenseService } from '../gestion-depense.service';
-import { GestionSoldeService } from '../gestion-solde.service';
+import { Depense, depenses } from '../../fake-data/depense';
+import { GestionDepenseService } from '../../services/gestion-depense.service';
+import { GestionSoldeService } from '../../services/gestion-solde.service';
 
 @Component({
   selector: 'app-depenses',

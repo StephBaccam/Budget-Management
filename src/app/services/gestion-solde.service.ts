@@ -2,7 +2,7 @@
 
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Solde } from './solde';
+import { Solde } from '../fake-data/solde';
 
 @Injectable({
   providedIn: 'root'

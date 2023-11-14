@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
-import { Depense, depenses } from '../depense';
-import { GestionDepenseService } from '../gestion-depense.service';
-import { GestionSoldeService } from '../gestion-solde.service';
-import { Solde, solde } from '../solde';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Depense } from '../../fake-data/depense';
+import { GestionDepenseService } from '../../services/gestion-depense.service';
+import { GestionSoldeService } from '../../services/gestion-solde.service';
+import { Solde, solde } from '../../fake-data/solde';
 
 @Component({
   selector: 'app-ajout-depense',
@@ -18,7 +17,7 @@ export class AjoutDepenseComponent implements OnInit {
       nom: ['', Validators.required],
       prix: [0, [Validators.required, Validators.min(1)]],
       description: [''],
-      date: ['', Validators.required]  
+      date: [(new Date()).toISOString().substring(0,10), Validators.required]  
     })
    }
 

@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "tricount-applike:build:production"
+              "buildTarget": "tricount-applike:build:production"
             },
             "development": {
-              "browserTarget": "tricount-applike:build:development"
+              "buildTarget": "tricount-applike:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "tricount-applike:build"
+            "buildTarget": "tricount-applike:build"
           }
         },
         "test": {

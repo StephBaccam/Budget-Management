@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { GestionSoldeService } from '../gestion-solde.service';
-import { solde, Solde } from '../solde';
+import { GestionSoldeService } from '../../services/gestion-solde.service';
+import { solde, Solde } from '../../fake-data/solde';
 
 @Component({
   selector: 'app-mon-solde',

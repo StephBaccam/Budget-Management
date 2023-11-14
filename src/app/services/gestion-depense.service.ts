@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Depense, depenses } from './depense';
+import { Depense, depenses } from '../fake-data/depense';
 
 @Injectable({
   providedIn: 'root'
