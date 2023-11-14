@@ -1,8 +1,13 @@
 <h2>Mes dépenses</h2>
 
-
-<li *ngFor="let depense of depenses">
-    <b>{{depense.date | date:'dd/MM/yyyy'}}</b> : {{depense.nom}} - {{depense.prix | currency}}
-    <em *ngIf="depense.description"> : {{depense.description}}</em>
-    <button (click)="deleteDepense(depense)">Retirer la dépense</button>
-</li>
+<ul>
+    @for(depense of depenses; track depense) {
+    <li>
+        <b>{{depense.date | date:'dd/MM/yyyy'}}</b> : {{depense.nom}} - {{depense.prix | currency}}
+        @if(depense.description) {
+        <em> : {{depense.description}}</em>
+        }
+        <button pButton (click)="deleteDepense(depense)">Retirer la dépense</button>
+    </li>
+    }
+</ul>

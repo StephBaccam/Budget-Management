@@ -9,6 +9,8 @@ import { DepensesComponent } from './depenses/depenses.component';
 import { AjoutDepenseComponent } from './ajout-depense/ajout-depense.component';
 import { ConfigSoldeComponent } from './config-solde/config-solde.component';
 import { RouterModule } from '@angular/router';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { RouterModule } from '@angular/router';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    InputTextModule,
+    ButtonModule,
     RouterModule.forRoot([
       { path: '', component: AjoutDepenseComponent },
       { path: 'solde', component: ConfigSoldeComponent }

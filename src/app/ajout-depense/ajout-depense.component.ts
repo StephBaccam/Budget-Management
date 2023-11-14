@@ -16,7 +16,7 @@ export class AjoutDepenseComponent implements OnInit {
   constructor(private depenseService: GestionDepenseService, private soldeService: GestionSoldeService, private formBuilder: FormBuilder) {
     this.formulaire = this.formBuilder.group({
       nom: ['', Validators.required],
-      prix: [0, [Validators.required, Validators.min(0)]],
+      prix: [0, [Validators.required, Validators.min(1)]],
       description: [''],
       date: ['', Validators.required]  
     })
