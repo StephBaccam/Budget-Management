@@ -3,7 +3,7 @@ export interface Depense {
     nom: string;
     prix: number;
     description: string;
-    date: Date;
+    date: any;
 }
 
 export const depenses = [

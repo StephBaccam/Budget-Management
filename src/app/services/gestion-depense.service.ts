@@ -1,31 +1,26 @@
 import { Injectable } from '@angular/core';
-import { Depense, depenses } from '../fake-data/depense';
+import { Depense } from '../fake-data/depense';
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, orderBy, query } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GestionDepenseService {
 
-  constructor() { }
-  items = [...depenses]
-
+  constructor(private fs: Firestore) { }
+  depenseCollection = collection(this.fs, 'depenses');
   ajoutDepense(depense: Depense) {
-    this.items.push(depense);
+    return addDoc(this.depenseCollection, depense);
   }
 
   getDepenses() {
-    return this.items;
+    const q = query(this.depenseCollection, orderBy("date", "desc"))
+    return collectionData(q, {idField:'id'}) as Observable<Depense[]>;
   }
 
   deleteDepense(idDepense: number) {
-    const index = this.items.findIndex(x => x.id === idDepense);
-    if(index !== -1) {
-      this.items.splice(index, 1);
-    }
-    else {
-      console.log("Erreur dans la suppression de la dépense");
-    }
-
-    return this.items;
+    let docRef = doc(this.fs, 'depenses/'+idDepense);
+    return deleteDoc(docRef);
   }
 }

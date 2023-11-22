@@ -1,5 +1,7 @@
 <h2>Mon Solde</h2>
 
-<div class="mon-solde">
-    <span>Solde : {{ solde?.solde | currency }} <a [title]="'Modifier le solde'" [routerLink]="['/solde']"></a></span>
-</div>
+@if(solde$ | async; as solde) {
+    <div class="mon-solde">
+        <span>Solde : {{ solde.solde | currency }} <a [title]="'Modifier le solde'" [routerLink]="['/solde']"></a></span>
+    </div>
+}

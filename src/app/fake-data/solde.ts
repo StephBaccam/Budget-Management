@@ -1,5 +1,5 @@
 export interface Solde {
     solde: number;
+    user: string;
+    id: string;
 }
-
-export const solde = {solde: 1000}

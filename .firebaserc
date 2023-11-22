@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "budget-management-77c08"
+  },
+  "targets": {
+    "budget-management-77c08": {
+      "hosting": {
+        "tricount-applike": [
+          "budget-management-77c08"
+        ]
+      }
+    }
+  }
+}

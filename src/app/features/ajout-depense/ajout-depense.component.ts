@@ -3,7 +3,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Depense } from '../../fake-data/depense';
 import { GestionDepenseService } from '../../services/gestion-depense.service';
 import { GestionSoldeService } from '../../services/gestion-solde.service';
-import { Solde, solde } from '../../fake-data/solde';
+import { Solde } from '../../fake-data/solde';
+import { Observable } from 'rxjs';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-ajout-depense',
@@ -12,7 +14,14 @@ import { Solde, solde } from '../../fake-data/solde';
 })
 export class AjoutDepenseComponent implements OnInit {
   formulaire: FormGroup;
-  constructor(private depenseService: GestionDepenseService, private soldeService: GestionSoldeService, private formBuilder: FormBuilder) {
+  idDocRef: any;
+  docData: any;
+  solde$!: Observable<Solde>;
+  solde!: Solde;
+  constructor(private depenseService: GestionDepenseService, 
+    private soldeService: GestionSoldeService, 
+    private sharedService: SharedService,
+    private formBuilder: FormBuilder) {
     this.formulaire = this.formBuilder.group({
       nom: ['', Validators.required],
       prix: [0, [Validators.required, Validators.min(1)]],
@@ -22,12 +31,16 @@ export class AjoutDepenseComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    console.log("Initialisation de AjoutDepenseComponent");
-  }
+    this.sharedService.sharedIdDocRefSolde$.subscribe((val) => {
+      console.log("DocRef in AjoutDepenseComponent", val)
+      this.idDocRef = val;
+    })
 
-  monSolde: Solde = { 
-    solde: solde.solde
-  };
+    this.sharedService.sharedSolde$.subscribe((val) => {
+      console.log("Should have Solde in AjoutDepenseComponent : ", val);
+      this.solde = val;
+    })
+  }
   
   nouvelleDepense: Depense = {
     id: 0,
@@ -36,10 +49,19 @@ export class AjoutDepenseComponent implements OnInit {
     description: '',
     date: new Date()
   };
-
+  
   envoyerDepense() {
-    this.depenseService.ajoutDepense(this.nouvelleDepense);
-    // this.monSolde.solde = this.monSolde.solde - this.nouvelleDepense.prix;
-    this.soldeService.soldeApresDepense(this.nouvelleDepense.prix);
+    this.nouvelleDepense.date = new Date(this.nouvelleDepense.date);
+    this.depenseService.ajoutDepense(this.nouvelleDepense).then((res) => {
+      console.log('Res added to Firestore', res);
+    })
+
+    this.solde = {
+      solde: this.solde.solde - this.nouvelleDepense.prix,
+      user: 'stephane.baccam1@gmail.com',
+      id: this.idDocRef
+    }
+
+    this.soldeService.update(this.solde);
   }
 }

@@ -1,37 +1,42 @@
 //Pas besoin du service pour l'instant
 
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Solde } from '../fake-data/solde';
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, DocumentData, updateDoc, CollectionReference, docData } from '@angular/fire/firestore';
+import { SharedService } from './shared.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GestionSoldeService {
+  private soldeCollection: CollectionReference<DocumentData>
 
-  constructor() { }
-  private soldeSubject = new BehaviorSubject<Solde>({ solde: 0 });
-
-  soldeApresDepense(depensePrix: number) {
-    const currentSolde = this.soldeSubject.value;
-    const newSolde = { solde: currentSolde.solde - depensePrix };
-    this.soldeSubject.next(newSolde);
+  constructor(private fs: Firestore, private sharedService: SharedService) { 
+    this.soldeCollection = collection(this.fs, 'solde');
   }
 
-  getSolde() {
-    return this.soldeSubject.asObservable();
+  getAll() {
+    return collectionData(this.soldeCollection, {idField:'id'}) as Observable<Solde[]>
   }
 
-  soldeApresSupprDepense(depensePrix: number) {
-    const currentSolde = this.soldeSubject.value;
-    const newSolde = { solde: currentSolde.solde + depensePrix };
-    this.soldeSubject.next(newSolde);
+  get(id: string) {
+    const soldeDocumentReference = doc(this.fs, `solde/${id}`);
+    return docData(soldeDocumentReference, {idField: 'id'}) as Observable<Solde>;
   }
 
-  // Ajoutez une méthode d'initialisation
-  initSolde(initialSolde: number) {
-    const initialSoldeValue = { solde: initialSolde };
-    this.soldeSubject.next(initialSoldeValue);
+  create(solde: Solde) {
+    return addDoc(this.soldeCollection, solde);
   }
 
+  update(solde: Solde) {
+    const soldeDocumentReference = doc(this.fs, `solde/${solde.id}`)
+    this.sharedService.updateSolde(solde);
+    return updateDoc(soldeDocumentReference, {...solde});
+  }
+
+  delete(id: string) {
+    const soldeDocumentReference = doc(this.fs, `solde/${id}`);
+    return deleteDoc(soldeDocumentReference);
+  }
 }
