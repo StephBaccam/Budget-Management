@@ -1,1 +1,39 @@
-<p>config-solde works!</p>
+<div class="depenses">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                <h2>Configuration de votre solde</h2>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="formulaire">
+                <form [formGroup]="formulaire" (ngSubmit)="updateSolde()" class="flex flex-column gap-2">
+                    <div class="solde-form">
+                        <mat-form-field>
+                          <input matInput type="number" formControlName="soldeFormValue" [(ngModel)]="newSolde.solde" placeholder="Votre solde">
+                        </mat-form-field>
+              
+                        @if(formulaire.get('soldeFormValue')?.hasError('required') && formulaire.get('soldeFormValue')?.touched) {
+                        <span class="errorMessage">
+                          Veuillez renseigner votre nouveau solde
+                        </span>
+                        }
+                        @else if (formulaire.get('soldeFormValue')?.hasError('min') && formulaire.get('soldeFormValue')?.touched) {
+                        <span class="errorMessage">
+                          Le solde doit être supérieur ou égal à 1.
+                        </span>
+                        }
+                      </div>
+                      <mat-card-actions>
+                        <div class="bouton-form">
+                            <a mat-raised-button color="warn" routerLink="">Retour</a>
+                          </div>
+                        <div class="bouton-form">
+                          <button mat-raised-button color="primary" type="submit" [disabled]="formulaire.invalid">Valider nouveau solde</button>
+                        </div>
+                      </mat-card-actions>
+                </form>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

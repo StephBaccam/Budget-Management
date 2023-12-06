@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Depense } from '../../fake-data/depense';
 import { GestionDepenseService } from '../../services/gestion-depense.service';
 import { GestionSoldeService } from '../../services/gestion-solde.service';
 import { Observable } from 'rxjs';
 import { Solde } from 'src/app/fake-data/solde';
 import { SharedService } from 'src/app/services/shared.service';
+import { Auth, user } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-depenses',
@@ -19,10 +20,14 @@ export class DepensesComponent implements OnInit {
   docData: any;
   solde$!: Observable<Solde>
   solde: any;
+  private auth: Auth = inject(Auth);
+  user$ = user(this.auth);
+  user:any;
+  
   
   ngOnInit(): void {
     this.refreshDepense();
-    this.sharedService.sharedIdDocRefSolde$.subscribe((val) => {
+    this.sharedService.sharedIdDocSolde$.subscribe((val) => {
       console.log("val in DepenseComponent", val)
       this.idDocRef = val;
     })
@@ -31,11 +36,16 @@ export class DepensesComponent implements OnInit {
       console.log("Should have Solde : ", val);
       this.solde = val;
     })
+
+    this.sharedService.sharedUser$.subscribe((val) => {
+      console.log("Should have User : ", val);
+      this.user = val;
+    })
   }
 
   refreshDepense() {
     this.depenseService.getDepenses().subscribe((res) => {
-      this.depenses = res;
+      this.depenses = res.filter(x => x.user == this.user.email)
     });
   }
 
@@ -46,7 +56,7 @@ export class DepensesComponent implements OnInit {
 
     this.solde = {
       solde: this.solde.solde + depense.prix,
-      user: 'stephane.baccam1@gmail.com',
+      user: this.user.email,
       id: this.idDocRef
     }
 

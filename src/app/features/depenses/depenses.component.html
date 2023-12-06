@@ -1,16 +1,28 @@
-<h2>Mes dépenses</h2>
-
-<ul>
-    @for(depense of depenses; track depense) {
-    <li>
-        <b>{{depense.date.toDate() | date:'dd/MM/yyyy'}}</b> : {{depense.nom}} - {{depense.prix | currency}}
-        @if(depense.description) {
-        <em> : {{depense.description}}</em>
-        }
-        <button (click)="deleteDepense(depense)">Retirer la dépense</button>
-    </li>
-    }
-    @empty {
-        <p>Vous avez aucune dépense</p>
-    }
-</ul>
+<div class="depenses">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                <h2>Mes dépenses</h2>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-list>
+    
+                @for(depense of depenses; track depense.user) {
+                <mat-list-item>
+                    <b>{{depense.date.toDate() | date:'dd/MM/yyyy'}}</b> : {{depense.nom}} - {{depense.prix | currency}}
+                    @if(depense.description) {
+                    <em> : {{depense.description}}</em>
+                    }
+                        <button mat-raised-button color="warn" (click)="deleteDepense(depense)">Retirer la dépense</button>
+                </mat-list-item>
+                }
+                @empty {
+                <p>Vous n'avez aucune dépense</p>
+                }
+    
+    
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+</div>

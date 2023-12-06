@@ -1,7 +1,35 @@
-<h2>Mon Solde</h2>
-
-@if(solde$ | async; as solde) {
+@defer(when isSoldeFound !== undefined) {
     <div class="mon-solde">
-        <span>Solde : {{ solde.solde | currency }} <a [title]="'Modifier le solde'" [routerLink]="['/solde']"></a></span>
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>
+                    <h2>Mon Solde</h2>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                @if(isSoldeFound && (solde$ | async); as solde) {
+                    <div class="mon-solde">
+                        <span>Solde : {{ solde.solde | currency }} <a mat-raised-button [routerLink]="['/solde']">Modifier le solde</a></span>
+                    </div>
+                }
+                @else {
+                    <a mat-raised-button [routerLink]="['/solde']">Configurer votre solde</a>
+                }
+            </mat-card-content>
+        </mat-card>
     </div>
+    
+    @defer(when isSoldeFound) {
+        <app-ajout-depense></app-ajout-depense>
+    }
 }
+
+@placeholder {
+    <app-spinner></app-spinner>
+}
+
+@error {
+    <p class="error-message">Erreur dans le chargement de la page</p>
+}
+
+

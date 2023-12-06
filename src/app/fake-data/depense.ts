@@ -1,9 +1,10 @@
 export interface Depense {
-    id: number;
+    id: string;
     nom: string;
     prix: number;
     description: string;
     date: any;
+    user: string;
 }
 
 export const depenses = [

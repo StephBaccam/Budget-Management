@@ -1,8 +1,19 @@
-<mat-toolbar color="primary">
-    <span>Budget Management</span>
+<mat-toolbar class="topbar" color="primary">
+        <span class="title">Budget Management</span>
+        <!-- @if(isLoggedIn) {
+            <div class="flex flex-row">
+                <p>Account</p>
+                <a href="/login" (click)="SignOut()">Log Out</a>
+            </div>
+        } -->
+
+        <span class="example-spacer"></span>
+        <div class="nav-link">
+            <a href="#" style="margin-right: 1rem;">Account</a>
+            <a href="/login"(click)="SignOut()">Log Out</a>
+        </div>
 </mat-toolbar>
 
-
-<app-ajout-depense></app-ajout-depense>
-<app-mon-solde></app-mon-solde>
-<app-depenses></app-depenses>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>

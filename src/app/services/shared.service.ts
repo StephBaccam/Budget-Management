@@ -6,19 +6,33 @@ import { Solde } from '../fake-data/solde';
   providedIn: 'root'
 })
 export class SharedService {
-  private sharedIdDocRefSoldeSource = new BehaviorSubject<string>('default');
+  private sharedIdDocSoldeSource = new BehaviorSubject<string>('default');
   private sharedSoldeSource = new BehaviorSubject<Solde>({solde: 0, user: '', id:''})
+  private sharedIsLoggedInSource = new BehaviorSubject<boolean>(false)
+  private sharedUserSource = new BehaviorSubject<any>({})
 
-  sharedIdDocRefSolde$ = this.sharedIdDocRefSoldeSource.asObservable();
+  sharedIdDocSolde$ = this.sharedIdDocSoldeSource.asObservable();
   sharedSolde$ = this.sharedSoldeSource.asObservable();
+  sharedIsLoggedIn$ = this.sharedIsLoggedInSource.asObservable();
+  sharedUser$ = this.sharedUserSource.asObservable();
 
-  updateIdDocRefSolde(newValue: string) {
-    console.log("Shared Service Called with new Value of IdDocRefSolde : ", newValue)
-    this.sharedIdDocRefSoldeSource.next(newValue);
+  updateIdDocSolde(newValue: string) {
+    console.log("Shared Service Called with new Value of IdDocSolde : ", newValue)
+    this.sharedIdDocSoldeSource.next(newValue);
   }
 
   updateSolde(newSolde: Solde) {
     console.log("Shared Service Called with new Value of Solde : ", newSolde)
     this.sharedSoldeSource.next(newSolde)
+  }
+
+  updateIsLoggedIn(newValue: boolean) {
+    console.log("Shared Service Called with new Value of IsLoggedIn : ", newValue)
+    this.sharedIsLoggedInSource.next(newValue)
+  }
+
+  updateUser(newValue: any) {
+    console.log("Shared Service Called with new Value of User : ", newValue)
+    this.sharedUserSource.next(newValue);
   }
 }
