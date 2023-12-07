@@ -6,8 +6,6 @@ import { GestionSoldeService } from '../../services/gestion-solde.service';
 import { Solde } from '../../fake-data/solde';
 import { Observable } from 'rxjs';
 import { SharedService } from 'src/app/services/shared.service';
-import * as _moment from 'moment';
-const moment = _moment; 
 
 
 @Component({
@@ -28,7 +26,7 @@ export class AjoutDepenseComponent implements OnInit {
     nom: '',
     prix: 0,
     description: '',
-    date: moment(new Date(), "MM/DD/YYYY"),
+    date: new Date(),
     user:''
   };
 
@@ -40,7 +38,7 @@ export class AjoutDepenseComponent implements OnInit {
       nom: ['', Validators.required],
       prix: [0, [Validators.required, Validators.min(1)]],
       description: [''],
-      date: [moment(new Date(), "MM/DD/YYYY"), Validators.required]  
+      date: [new Date(), Validators.required]  
     })
    }
 
@@ -67,7 +65,7 @@ export class AjoutDepenseComponent implements OnInit {
       nom: '',
       prix: 0,
       description: '',
-      date: moment(new Date(), "MM/DD/YYYY"),
+      date: new Date(),
       user:''
     };
 

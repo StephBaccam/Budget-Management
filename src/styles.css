@@ -173,10 +173,25 @@ main {
 .mat-mdc-card {
   border-width: 2px !important;
   border-color: #8a99b5 !important;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
+}
+
+.mat-mdc-snack-bar-container {
+  &.red-snackbar {
+    --mdc-snackbar-container-color: #EF4040;
+    --mat-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+
+  &.green-snackbar {
+    --mdc-snackbar-container-color: #A8DF8E;
+    --mat-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
 }
 
 .errorMessage {
-  color: red;
+  color: #EF4040 
 }
 
 .example-spacer {
@@ -186,6 +201,22 @@ main {
 .nav-link a {
   color: white;
   text-decoration: none;
+}
+
+.action-buttons {
+  gap: 0.5rem;
+}
+
+.xl-text {
+  font-size: 24px;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+
+.ml-1 {
+  margin-left: 1rem;
 }
 
 html,

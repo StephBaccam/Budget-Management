@@ -3,22 +3,54 @@
     <h1>Login</h1>
   </mat-card-header>
   <mat-card-content>
-    <form class="example-form">
-      <mat-form-field class="example-full-width">
-        <mat-label>Login</mat-label>
-        <input matInput placeholder="Email" value="stephane.baccam1@gmail.com">
-      </mat-form-field>
-    
-      <mat-form-field class="example-full-width">
-        <mat-label>Password</mat-label>
-        <input type="password" matInput>
-      </mat-form-field>
-    </form>
-  
-    <mat-card-actions>
-      <button mat-raised-button (click)="SignInWithGoogle()">Sign-in with Google</button>
-    </mat-card-actions>
+    <div class="card-content">
+      <div class="welcome-text">
+        <span>
+          <b>Vos informations sont protégées et ne seront en aucun cas utilisées à des fins non consenties.</b>
+          <br>
+          Si vous souhaitez tout de même préserver votre anonymat, vous pouvez vous inscrire avec une adresse email
+          fictif (ex: test&#64;xyz.com).
+        </span>
+      </div>
+
+      <div class="login-form">
+        <form class="example-form" [formGroup]="formulaireLogin" (ngSubmit)="SignInWithEmailAndPassword()">
+          <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email">
+          </mat-form-field>
+
+          @if(formulaireLogin.get('email')?.hasError('required') && formulaireLogin.get('email')?.touched) {
+          <span class="errorMessage">
+            Veuillez saisir votre adresse email
+          </span>
+          }
+
+          @if(formulaireLogin.get('email')?.hasError('pattern') && formulaireLogin.get('email')?.touched) {
+          <span class="errorMessage">
+            Veuillez une adresse email valide
+          </span>
+          }
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Mot de passe</mat-label>
+            <input type="password" matInput formControlName="password">
+          </mat-form-field>
+          
+          @if(formulaireLogin.get('password')?.hasError('required') &&
+          formulaireLogin.get('password')?.touched) {
+          <span class="errorMessage">
+            Veuillez saisir votre mot de passe
+          </span>
+          }
+
+          <mat-card-actions class="action-buttons">
+            <button mat-raised-button color="primary" type="submit">Connexion</button>
+            <button mat-raised-button type="button" (click)="SignInWithGoogle()">Connexion avec Google</button>
+            <button mat-raised-button type="button" color="accent" (click)="OpenSignUpDialog()">Inscription</button>
+          </mat-card-actions>
+        </form>
+      </div>
+    </div>
   </mat-card-content>
 </mat-card>
-
-

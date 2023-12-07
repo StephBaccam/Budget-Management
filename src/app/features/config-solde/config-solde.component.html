@@ -2,7 +2,7 @@
     <mat-card>
         <mat-card-header>
             <mat-card-title>
-                <h2>Configuration de votre solde</h2>
+                <h2>Configuration de votre budget</h2>
             </mat-card-title>
         </mat-card-header>
         <mat-card-content>
@@ -15,21 +15,21 @@
               
                         @if(formulaire.get('soldeFormValue')?.hasError('required') && formulaire.get('soldeFormValue')?.touched) {
                         <span class="errorMessage">
-                          Veuillez renseigner votre nouveau solde
+                          Veuillez renseigner votre nouveau budget
                         </span>
                         }
                         @else if (formulaire.get('soldeFormValue')?.hasError('min') && formulaire.get('soldeFormValue')?.touched) {
                         <span class="errorMessage">
-                          Le solde doit être supérieur ou égal à 1.
+                          Le budget doit être supérieur ou égal à 1.
                         </span>
                         }
                       </div>
-                      <mat-card-actions>
+                      <mat-card-actions class="action-buttons">
                         <div class="bouton-form">
                             <a mat-raised-button color="warn" routerLink="">Retour</a>
                           </div>
                         <div class="bouton-form">
-                          <button mat-raised-button color="primary" type="submit" [disabled]="formulaire.invalid">Valider nouveau solde</button>
+                          <button mat-raised-button color="primary" type="submit" [disabled]="formulaire.invalid">Valider nouveau budget</button>
                         </div>
                       </mat-card-actions>
                 </form>

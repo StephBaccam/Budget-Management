@@ -1,0 +1,48 @@
+<h1 mat-dialog-title>Inscription</h1>
+
+<form [formGroup]="formulaireInscription" (ngSubmit)="SignUpWithEmailAndPassword()">
+    <div mat-dialog-content class="signup-form" >
+
+
+        <mat-form-field>
+            <mat-label>Adresse Email</mat-label>
+            <input matInput type="email" formControlName="email">
+        </mat-form-field>
+
+        @if(formulaireInscription.get('email')?.hasError('required') && formulaireInscription.get('email')?.touched) {
+        <span class="errorMessage">
+            Veuillez saisir votre adresse email
+        </span>
+        }
+
+        @if(formulaireInscription.get('email')?.hasError('pattern') && formulaireInscription.get('email')?.touched) {
+            <span class="errorMessage">
+                Veuillez une adresse email valide
+            </span>
+            }
+
+        <mat-form-field>
+            <mat-label>Mot de passe</mat-label>
+            <input matInput type="password" formControlName="password">
+        </mat-form-field>
+
+        @if(formulaireInscription.get('password')?.hasError('required') &&
+        formulaireInscription.get('password')?.touched) {
+        <span class="errorMessage">
+            Veuillez saisir votre mot de passe
+        </span>
+        }
+
+        @if(formulaireInscription.get('password')?.hasError('minlength') &&
+        formulaireInscription.get('password')?.touched) {
+        <span class="errorMessage">
+            Veuillez saisir au moins 6 caractères
+        </span>
+        }
+
+    </div>
+    <div mat-dialog-actions>
+        <button mat-raised-button color="warn" (click)="onNoClick()">Retour</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="formulaireInscription.invalid">Valider</button>
+    </div>
+</form>

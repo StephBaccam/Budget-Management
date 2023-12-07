@@ -3,17 +3,19 @@
         <mat-card>
             <mat-card-header>
                 <mat-card-title>
-                    <h2>Mon Solde</h2>
+                    <h2>Mon Budget</h2>
                 </mat-card-title>
             </mat-card-header>
             <mat-card-content>
                 @if(isSoldeFound && (solde$ | async); as solde) {
                     <div class="mon-solde">
-                        <span>Solde : {{ solde.solde | currency }} <a mat-raised-button [routerLink]="['/solde']">Modifier le solde</a></span>
+                        <span class="xl-text">{{ solde.solde | currency:'EUR':true }}</span>
+                        <br>
+                        <a mat-raised-button color="primary" [routerLink]="['/solde']" class="mt-1">Modifier le budget</a>
                     </div>
                 }
                 @else {
-                    <a mat-raised-button [routerLink]="['/solde']">Configurer votre solde</a>
+                    <a mat-raised-button color="primary" [routerLink]="['/solde']">Configurer votre budget</a>
                 }
             </mat-card-content>
         </mat-card>

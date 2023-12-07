@@ -1,17 +1,15 @@
 <mat-toolbar class="topbar" color="primary">
-        <span class="title">Budget Management</span>
-        <!-- @if(isLoggedIn) {
-            <div class="flex flex-row">
-                <p>Account</p>
-                <a href="/login" (click)="SignOut()">Log Out</a>
-            </div>
-        } -->
+        <span class="title">Budget Management v0.2</span>
 
         <span class="example-spacer"></span>
-        <div class="nav-link">
-            <a href="#" style="margin-right: 1rem;">Account</a>
-            <a href="/login"(click)="SignOut()">Log Out</a>
-        </div>
+        @if(isLoggedIn) {
+            <div class="nav-link">
+                <a href="/login"(click)="SignOut()">Se déconnecter</a>
+            </div>
+        }
+        <!-- <div class="nav-link">
+            <a href="/login"(click)="SignOut()">Se déconnecter</a>
+        </div> -->
 </mat-toolbar>
 
 <div class="container">

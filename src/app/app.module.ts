@@ -1,6 +1,7 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import localeFR from '@angular/common/locales/fr'
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -10,6 +11,7 @@ import { DepensesComponent } from './features/depenses/depenses.component';
 import { AjoutDepenseComponent } from './features/ajout-depense/ajout-depense.component';
 import { ConfigSoldeComponent } from './features/config-solde/config-solde.component';
 import { SpinnerComponent } from './features/spinner/spinner.component';
+import { SignupDialogComponent } from './features/authentification/signup-dialog/signup-dialog.component';
 
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,6 +25,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 import { AuthentificationComponent } from './features/authentification/authentification.component';
 
@@ -32,10 +37,9 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { firebaseConfig } from './environments/environment'
 
-import { MomentDateModule } from '@angular/material-moment-adapter';
-import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { registerLocaleData } from '@angular/common';
 
-import { MY_DATE_FORMATS } from './tools/date-format';
+registerLocaleData(localeFR)
 
 @NgModule({
   declarations: [
@@ -45,7 +49,8 @@ import { MY_DATE_FORMATS } from './tools/date-format';
     AjoutDepenseComponent,
     ConfigSoldeComponent,
     AuthentificationComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    SignupDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -58,10 +63,11 @@ import { MY_DATE_FORMATS } from './tools/date-format';
     MatInputModule,
     MatFormFieldModule,
     MatDatepickerModule,
-    MomentDateModule,
     MatNativeDateModule,
     MatCardModule,
     MatListModule,
+    MatDialogModule,
+    MatSnackBarModule,
     RouterModule.forRoot([
       { path: '', component: MonSoldeComponent },
       { path: 'solde', component: ConfigSoldeComponent },
@@ -92,9 +98,9 @@ import { MY_DATE_FORMATS } from './tools/date-format';
     }),
   ],
   providers: [ 
-  {
-    provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS
-  }],
+{
+  provide: LOCALE_ID, useValue: 'fr-FR'
+}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

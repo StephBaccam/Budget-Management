@@ -4,6 +4,8 @@ import { Solde } from 'src/app/fake-data/solde';
 import { GestionSoldeService } from 'src/app/services/gestion-solde.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { v4 as uuidv4 } from 'uuid';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-config-solde',
@@ -21,7 +23,13 @@ export class ConfigSoldeComponent implements OnInit {
     user: ''
   };
 
-  constructor(private formBuilder: FormBuilder, private sharedService: SharedService, private gestionSoldeService: GestionSoldeService) {
+  constructor(
+    private formBuilder: FormBuilder, 
+    private sharedService: SharedService, 
+    private gestionSoldeService: GestionSoldeService,
+    private snackBar: MatSnackBar,
+    private router: Router
+    ) {
     this.formulaire = this.formBuilder.group({
       soldeFormValue: [0, [Validators.required, Validators.min(1)]],
     })
@@ -54,6 +62,8 @@ export class ConfigSoldeComponent implements OnInit {
       this.newSolde.user = this.user.email;
       this.gestionSoldeService.update(this.newSolde);
     }
+    this.snackBar.open("Votre budget a été mis à jour", "Fermer",  {duration: 3000, panelClass: ['green-snackbar']})
+    this.router.navigate([""])
   }
 
 }

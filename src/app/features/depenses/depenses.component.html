@@ -10,11 +10,11 @@
     
                 @for(depense of depenses; track depense.user) {
                 <mat-list-item>
-                    <b>{{depense.date.toDate() | date:'dd/MM/yyyy'}}</b> : {{depense.nom}} - {{depense.prix | currency}}
+                    <b>{{depense.date.toDate() | date:'dd/MM/yyyy'}}</b> : {{depense.nom}} - {{depense.prix | currency:'EUR'}}
                     @if(depense.description) {
                     <em> : {{depense.description}}</em>
                     }
-                        <button mat-raised-button color="warn" (click)="deleteDepense(depense)">Retirer la dépense</button>
+                        <button class="ml-1" mat-raised-button color="warn" (click)="deleteDepense(depense)">Retirer la dépense</button>
                 </mat-list-item>
                 }
                 @empty {

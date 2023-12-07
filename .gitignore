@@ -46,3 +46,4 @@ src/app/firebase.config.ts
 .firebase
 *-debug.log
 .runtimeconfig.json
+src/app/firebase.config.ts
