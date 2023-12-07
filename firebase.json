@@ -21,6 +21,7 @@
   ],
   "hosting": [
     {
+      "target": "tricount-applike",
       "public": "public",
       "ignore": [
         "firebase.json",
