@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Solde } from 'src/app/fake-data/solde';
 import { SharedService } from 'src/app/services/shared.service';
 import { Auth, user } from '@angular/fire/auth';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-depenses',
@@ -13,7 +14,10 @@ import { Auth, user } from '@angular/fire/auth';
   styleUrls: ['./depenses.component.css']
 })
 export class DepensesComponent implements OnInit {
-  constructor(private depenseService: GestionDepenseService, private soldeService: GestionSoldeService, private sharedService: SharedService) { }
+  constructor(private depenseService: GestionDepenseService, 
+    private soldeService: GestionSoldeService, 
+    private sharedService: SharedService,
+    private snackBar: MatSnackBar) { }
 
   depenses: Depense[] = [];
   idDocRef: any;
@@ -61,5 +65,6 @@ export class DepensesComponent implements OnInit {
     }
 
     this.soldeService.update(this.solde);
+    this.snackBar.open('Dépense supprimée', "Fermer", { duration: 3000, panelClass: ['red-snackbar']})
   }
 }

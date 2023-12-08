@@ -6,6 +6,7 @@ import { GestionSoldeService } from '../../services/gestion-solde.service';
 import { Solde } from '../../fake-data/solde';
 import { Observable } from 'rxjs';
 import { SharedService } from 'src/app/services/shared.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -33,7 +34,8 @@ export class AjoutDepenseComponent implements OnInit {
   constructor(private depenseService: GestionDepenseService, 
     private soldeService: GestionSoldeService, 
     private sharedService: SharedService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar) {
     this.formulaire = this.formBuilder.group({
       nom: ['', Validators.required],
       prix: [0, [Validators.required, Validators.min(1)]],
@@ -69,7 +71,10 @@ export class AjoutDepenseComponent implements OnInit {
       user:''
     };
 
-    this.formulaire.setErrors(null);
+    this.formulaire.reset();
+    Object.keys(this.formulaire.controls).forEach(key => {
+      this.formulaire.get(key)?.setErrors(null);
+    })
   }
   
   
@@ -85,5 +90,6 @@ export class AjoutDepenseComponent implements OnInit {
 
     this.soldeService.update(this.solde);
     this.clearDepenseForm();
+    this.snackBar.open('Dépense ajouté', "Fermer", {duration: 3000, panelClass: ['green-snackbar']})
   }
 }
