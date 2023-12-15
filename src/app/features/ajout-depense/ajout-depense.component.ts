@@ -46,16 +46,13 @@ export class AjoutDepenseComponent implements OnInit {
 
   ngOnInit(): void {
     this.sharedService.sharedIdDocSolde$.subscribe((val) => {
-      console.log("DocRef in AjoutDepenseComponent", val)
       this.idDocSolde = val;
     })
 
     this.sharedService.sharedSolde$.subscribe((val) => {
-      console.log("Should have Solde in AjoutDepenseComponent : ", val);
       this.solde = val;
     })
     this.sharedService.sharedUser$.subscribe((val) => {
-      console.log("Should have User in AjoutDepenseComponent : ", val);
       this.user = val;
     })
   }

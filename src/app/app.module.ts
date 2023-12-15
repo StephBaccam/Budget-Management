@@ -12,6 +12,7 @@ import { AjoutDepenseComponent } from './features/ajout-depense/ajout-depense.co
 import { ConfigSoldeComponent } from './features/config-solde/config-solde.component';
 import { SpinnerComponent } from './features/spinner/spinner.component';
 import { SignupDialogComponent } from './features/authentification/signup-dialog/signup-dialog.component';
+import { ContactComponent } from './features/contact/contact.component';
 
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -50,7 +51,8 @@ registerLocaleData(localeFR)
     ConfigSoldeComponent,
     AuthentificationComponent,
     SpinnerComponent,
-    SignupDialogComponent
+    SignupDialogComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +73,8 @@ registerLocaleData(localeFR)
     RouterModule.forRoot([
       { path: '', component: MonSoldeComponent },
       { path: 'solde', component: ConfigSoldeComponent },
-      { path: 'login', component: AuthentificationComponent}
+      { path: 'login', component: AuthentificationComponent},
+      { path: 'contact', component: ContactComponent}
     ]),
     BrowserAnimationsModule,
     provideFirebaseApp(() => initializeApp(firebaseConfig)),

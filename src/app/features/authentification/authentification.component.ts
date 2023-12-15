@@ -41,13 +41,11 @@ export class AuthentificationComponent implements OnInit {
   }
 
   OpenSignUpDialog() {
-    console.log("OpenSignUpDialog Clicked");
     const dialogRef = this.dialog.open(SignupDialogComponent, {
       width: '600px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
       if(result !== undefined) {
         this.snackBar.open(result.message, 'Fermer', {duration: 3000, panelClass: [result.cssClass]});
       }
@@ -58,13 +56,9 @@ export class AuthentificationComponent implements OnInit {
   }
 
   SignInWithEmailAndPassword() {
-    console.log("SignInWithEmailAndPassword Clicked");
-    console.log("User Login Info : ", this.formulaireLogin.value)
     signInWithEmailAndPassword(this.auth, this.formulaireLogin.value.email, this.formulaireLogin.value.password)
       .then((userCredential) => {
         // Signed in 
-        const user = userCredential.user;
-        console.log("Signed In! User : ", user)
         this.sharedService.updateIsLoggedIn(true);
         this.user$.subscribe((res) => {
           this.sharedService.updateUser(res);
@@ -95,8 +89,6 @@ export class AuthentificationComponent implements OnInit {
     signInWithPopup(this.auth, this.provider)
     .then((result) => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
-      console.log("Result : ", result)
-      console.log(this.user$);
       this.sharedService.updateIsLoggedIn(true);
       this.user$.subscribe((res) => {
         this.sharedService.updateUser(res);

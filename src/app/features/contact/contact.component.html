@@ -1,0 +1,45 @@
+<div class="contact">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h2>Contact</h2>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="card-body">
+            <span>Si vous souhaitez me contacter, n'hésitez pas à m'envoyer un mail à cette adresse : stephane.baccam1&#64;gmail.com</span>
+            <br>
+            <span>Vous pouvez aussi écrire un feedback dans le champs ci-dessous :</span>
+            @if(loggedIn) {
+                <form [formGroup]="formulaire" (ngSubmit)="envoyerFeedback()">
+
+                    <div class="feedback-form">
+                      <mat-form-field>
+                        <textarea matInput type="text" formControlName="message"
+                          placeholder="Feedback..."></textarea>
+                      </mat-form-field>
+                    </div>
+        
+                      @if (formulaire.get('message')?.hasError('required') && formulaire.get('message')?.touched) {
+                      <span class="errorMessage">
+                        Veuillez saisir des caractères
+                      </span>
+                      }
+            
+                    <mat-card-actions>
+                      <div class="bouton-form">
+                        <button mat-raised-button color="primary" type="submit" [disabled]="formulaire.invalid">
+                            Envoyer Feedback
+                        </button>
+                      </div>
+                    </mat-card-actions>
+                  </form>
+            }
+            @else {
+                <span>Vous devez être connecté pour voir ce champs</span>
+            }
+          
+        </div>
+      </mat-card-content>
+    </mat-card>
+</div>

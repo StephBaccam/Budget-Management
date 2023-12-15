@@ -47,16 +47,12 @@ export class ConfigSoldeComponent implements OnInit {
   }
 
   updateSolde() {
-    if(this.idDocSolde === "default") {
-      console.log("IdDoc of Solde not found, creating. %c!!! if it's not a first login then it's a bug", 'color: red')
-      
+    if(this.idDocSolde === "default") {      
       //Create Document
       this.newSolde.user = this.user.email;
       this.gestionSoldeService.create(this.newSolde)
     }
     else {
-      console.log("IdDoc of Solde found, updating.")
-
       //Update Document
       this.newSolde.id = this.idDocSolde;
       this.newSolde.user = this.user.email;

@@ -201,8 +201,8 @@ main {
 .nav-link a {
   color: white;
   text-decoration: none;
+  margin-left: 1rem;
 }
-
 .action-buttons {
   gap: 0.5rem;
 }

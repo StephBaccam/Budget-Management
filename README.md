@@ -24,3 +24,7 @@ Peut être utile dans la prévision de budget (ex: Plannification événement, p
 - Correction format de la date
 - Ajout de messages toast
 - Meilleur QOL 
+
+### v0.3
+
+- Ajout d'une page de contact

@@ -15,7 +15,6 @@ export class AppComponent implements OnInit {
   constructor(private sharedService: SharedService, private router: Router) { }
   ngOnInit(): void {
     this.sharedService.sharedIsLoggedIn$.subscribe((val) => {
-      console.log("isLoggedIn in appcomponent", val)
       this.isLoggedIn = val;
 
       if (!this.isLoggedIn) {
@@ -37,5 +36,8 @@ export class AppComponent implements OnInit {
       console.log('sign out error: ' + error);
     })
   }
-  title = 'tricount-applike';
+
+  NavigateToContact() {
+    this.router.navigate(['/contact'])
+  }
 }
